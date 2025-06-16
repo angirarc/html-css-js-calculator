@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div id="header">
+        <p class="active">Calculator</p>
+        <p>Converter</p>
+    </div>
+    <div id="display">
+        <div id="history">
+            <p>history</p>
+        </div>
+        <div id="current">
+            <p id="operation">0</p>
+            <p id="result">0</p>
+        </div>
+    </div>
+    <div id="buttons">
+        <div class="special">C</div>
+        <div data-function="backspace" class="special">
+            <svg data-function="backspace" height="32px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M22 12C22 15.7712 22 17.6569 20.7961 18.8284C19.5921 20 17.6544 20 13.779 20H11.142C8.91458 20 7.80085 20 6.87114 19.4986C5.94144 18.9971 5.35117 18.0781 4.17061 16.24L3.48981 15.18C2.4966 13.6336 2 12.8604 2 12C2 11.1396 2.4966 10.3664 3.48981 8.82001L4.17061 7.76001C5.35117 5.92191 5.94144 5.00286 6.87114 4.50143C7.80085 4 8.91458 4 11.142 4L13.779 4C17.6544 4 19.5921 4 20.7961 5.17157C21.4673 5.82475 21.7643 6.69989 21.8957 8"
+                    stroke="#ff9900" stroke-width="1.5" stroke-linecap="round" />
+                <path d="M15.5 9.50002L10.5 14.5M10.5 9.5L15.5 14.5" stroke="#ff9900" stroke-width="1.5"
+                    stroke-linecap="round" />
+            </svg>
+        </div>
+        <div class="special">%</div>
+        <div class="special">/</div>
+        <div>7</div>
+        <div>8</div>
+        <div>9</div>
+        <div class="special">X</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+        <div class="special">-</div>
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div class="special">+</div>
+        <div id="rotate" class="special">
+            <svg height="32px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M11.5 20.5C6.80558 20.5 3 16.6944 3 12C3 7.30558 6.80558 3.5 11.5 3.5C16.1944 3.5 20 7.30558 20 12C20 13.5433 19.5887 14.9905 18.8698 16.238M22.5 15L18.8698 16.238M17.1747 12.3832L18.5289 16.3542L18.8698 16.238"
+                    stroke="#ff9900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </div>
+        <div>0</div>
+        <div>.</div>
+        <div class="equal">=</div>
+    </div>
+    <script src="index.js"></script>
+</body>
+
+</html>

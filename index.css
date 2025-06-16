@@ -1,0 +1,96 @@
+body {
+    margin: 0;
+    padding: 20px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #1a1a1a;
+    color: white;
+}
+
+#header {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 20px;
+}
+
+#header p {
+    margin: 0;
+    font-size: 20px;
+    color: rgb(172, 172, 172);
+}
+
+#header p.active {
+    color: white;
+}
+
+#display {
+    flex: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+#history {
+    flex: 1.5;
+}
+
+#current {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+}
+
+/* #current p:first-of-type { */
+#operation {
+    font-size: 40px;
+    margin: 0;
+}
+
+/* #current p:last-of-type { */
+#result {
+    font-size: 30px;
+    margin: 0;
+}
+
+#buttons {
+    flex: 5;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+#buttons div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #333333;
+    border-radius: 10px;
+    font-size: 28px;
+}
+
+img {
+    width: 20px;
+}
+
+#buttons div:hover {
+    background-color: #474747;
+}
+
+.special {
+    color: #ff9900;
+}
+
+#buttons div.equal {
+    background-color: #ff9900;
+}
+
+#buttons div.equal:hover {
+    background-color: #fea115;
+}
