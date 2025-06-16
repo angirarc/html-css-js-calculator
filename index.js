@@ -18,6 +18,7 @@ function updateDisplay(evaluated) {
         document.querySelector('#result').innerHTML = operation;
     } else {
         document.querySelector('#operation').innerHTML = operation;
+        document.querySelector('#result').innerHTML = operation;
     }
 }
 
