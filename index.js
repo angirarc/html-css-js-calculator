@@ -1,13 +1,15 @@
 var a = '', b = '', operator = null;
 
+// Update the display based on the current operation or result
 function updateDisplay(evaluated) {
-    let operation = '';
+    var operation = '';
     if (a !== '') {
         operation += a;
     }
 
     if (operator !== null) {
-        operation += operator;
+        // Show operator as 'X' instead of '*'
+        operation += (operator === '*') ? 'X' : operator;
     }
 
     if (b !== '') {
@@ -15,73 +17,133 @@ function updateDisplay(evaluated) {
     }
 
     if (evaluated) {
-        document.querySelector('#result').innerHTML = operation;
+        // When evaluated, show result ('a') as string
+        document.querySelector('#result').innerHTML = a || '0';
     } else {
-        document.querySelector('#operation').innerHTML = operation;
-        document.querySelector('#result').innerHTML = operation;
+        document.querySelector('#operation').innerHTML = operation || '0';
+        document.querySelector('#result').innerHTML = operation || '0';
     }
 }
 
 function evaluate() {
-    if (operator === '+') {
-        a = Number(a) + Number(b);
-    } else if (operator === '-') {
-        a = Number(a) - Number(b);
-    } else if (operator === 'X') {
-        a = Number(a) * Number(b);
-    } else if (operator === '/') {
-        a = Number(a) / Number(b);
-    } else if (operator === '%') {
-        a = Number(a) % Number(b);
+    if (operator === null || b === '') return;
+
+    var numA = Number(a);
+    var numB = Number(b);
+    var result;
+
+    switch (operator) {
+        case '+':
+            result = numA + numB;
+            break;
+        case '-':
+            result = numA - numB;
+            break;
+        case '*':
+            result = numA * numB;
+            break;
+        case '/':
+            if (numB === 0) {
+                alert('Error: Division by zero');
+                clearAll();
+                updateDisplay(false);
+                return;
+            }
+            result = numA / numB;
+            break;
+        case '%':
+            if (numB === 0) {
+                alert('Error: Modulo by zero');
+                clearAll();
+                updateDisplay(false);
+                return;
+            }
+            result = numA % numB;
+            break;
+        default:
+            return;
     }
 
-    operator = null;
+    a = result.toString();
     b = '';
+    operator = null;
+}
+
+function clearAll() {
+    a = '';
+    b = '';
+    operator = null;
 }
 
 function calculate(e) {
-    let value = e.target.innerHTML;
+    var value = e.target.innerHTML;
+
+    if (value === '.') {
+        // Handle decimal input for a and b
+        if (operator === null) {
+            if (a.indexOf('.') === -1) {
+                a += value;
+            }
+        } else {
+            if (b.indexOf('.') === -1) {
+                b += value;
+            }
+        }
+        updateDisplay(false);
+        return;
+    }
 
     if (isNaN(value)) {
         if (value === 'C') {
-            a = '';
-            b = '';
-            operator = null;
+            clearAll();
         } else if (value === '+') {
-            operator = '+';
+            processOperator('+');
         } else if (value === '-') {
-            operator = '-';
+            processOperator('-');
         } else if (value === 'X') {
-            operator = '*';
+            processOperator('*');
         } else if (value === '/') {
-            operator = '/';
+            processOperator('/');
         } else if (value === '%') {
-            operator = '%';
+            processOperator('%');
         } else if (value === '=') {
             evaluate();
         } else {
             var fn = e.target.getAttribute('data-function');
             if (fn === 'backspace') {
-                if (b !== '') {
-                    b = b.slice(0, -1);
-                } else if (operator !== null) {
-                    operator = null;
-                } else if (a !== '') {
-                    a = a.slice(0, -1);
-                }
+                backspace();
             }
         }
     } else {
+        // Number input
         if (operator === null) {
+            // Avoid leading zeros (allow single zero only)
+            if (value === '0' && a === '0') return;
             a += value;
         } else {
+            if (value === '0' && b === '0') return;
             b += value;
         }
     }
 
-    var evaluated = value === '=';
+    updateDisplay(value === '=');
+}
 
-    updateDisplay(evaluated);
+function processOperator(op) {
+    if (operator !== null && b !== '') {
+        evaluate(); // Evaluate existing before setting new operator
+    }
+    operator = op;
+}
+
+function backspace() {
+    if (b !== '') {
+        b = b.slice(0, -1);
+    } else if (operator !== null) {
+        operator = null;
+    } else if (a !== '') {
+        a = a.slice(0, -1);
+    }
 }
 
 var buttons = document.querySelectorAll('#buttons div');
@@ -90,4 +152,4 @@ for (var i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener('click', function(e) {
         calculate(e);
     });
-};
+}
